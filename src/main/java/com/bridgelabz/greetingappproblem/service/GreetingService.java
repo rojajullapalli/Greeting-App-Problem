@@ -1,6 +1,6 @@
 package com.bridgelabz.greetingappproblem.service;
 
-import com.bridgelabz.greetingappproblem.dto.StudentDto;
+import com.bridgelabz.greetingappproblem.dto.GreetingsDto;
 import com.bridgelabz.greetingappproblem.model.Greetings;
 import com.bridgelabz.greetingappproblem.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ public class GreetingService {
     @Autowired
     GreetingRepository greetingRepository;
 
-    public Greetings getStudentById(int id) {
+    public Greetings getGreetingById(int id) {
         Optional<Greetings> greetingModel = greetingRepository.findById(id);
         if(greetingModel.isPresent()){
             return greetingModel.get();
@@ -30,7 +30,7 @@ public class GreetingService {
             return firstName+" " +lastName;
     }
 
-    public Greetings addGreeting(StudentDto greetings) {
+    public Greetings addGreeting(GreetingsDto greetings) {
         Greetings greetingsEntity = new Greetings();
         greetingsEntity.setMessage(greetings.getMessage());
         return greetingRepository.save(greetingsEntity);
@@ -38,5 +38,15 @@ public class GreetingService {
 
     public List<Greetings> greetings() {
         return greetingRepository.findAll();
+    }
+
+    public Greetings updateGreeting(int id, GreetingsDto greetingsDto) {
+        Optional<Greetings> optionalGreetingEntity = greetingRepository.findById(id);
+        if(optionalGreetingEntity.isPresent()) {
+            Greetings greetings = optionalGreetingEntity.get();
+            greetings.setMessage(greetingsDto.getMessage());
+            return greetingRepository.save(greetings);
+        }
+        return null;
     }
 }

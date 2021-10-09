@@ -1,5 +1,5 @@
 package com.bridgelabz.greetingappproblem.controller;
-import com.bridgelabz.greetingappproblem.dto.StudentDto;
+import com.bridgelabz.greetingappproblem.dto.GreetingsDto;
 import com.bridgelabz.greetingappproblem.model.Greetings;
 import com.bridgelabz.greetingappproblem.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +25,25 @@ public class GreetingsController {
     }
 
     @PostMapping(value = "/addGreeting")
-    public Greetings addGreetings(@RequestBody StudentDto studentDto){
-        return greetingService.addGreeting(studentDto);
+    public Greetings addGreetings(@RequestBody GreetingsDto greetingsDto){
+        return greetingService.addGreeting(greetingsDto);
     }
 
     @GetMapping(value="/get-By-Id")
     public Greetings getGreetingsById(@RequestParam int id){
-        return  greetingService.getStudentById(id);
+        return  greetingService.getGreetingById(id);
     }
 
     @GetMapping(value="/getAllMessages")
     public List<Greetings> getAllGreetings(){
         return  greetingService.greetings();
+    }
+
+    @PutMapping(value = "/updateMessage/{id}")
+    public Greetings updateGreeting(
+            @PathVariable int id,
+            @RequestBody GreetingsDto greetingsDTO) {
+        return greetingService.updateGreeting(id, greetingsDTO);
     }
 
 }
