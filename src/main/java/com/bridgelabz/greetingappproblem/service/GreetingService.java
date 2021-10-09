@@ -1,10 +1,12 @@
 package com.bridgelabz.greetingappproblem.service;
 
-import com.bridgelabz.greetingappproblem.model.GreetingModel;
+import com.bridgelabz.greetingappproblem.dto.StudentDto;
+import com.bridgelabz.greetingappproblem.model.Greetings;
 import com.bridgelabz.greetingappproblem.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,8 +14,8 @@ public class GreetingService {
     @Autowired
     GreetingRepository greetingRepository;
 
-    public GreetingModel getStudentById(int id) {
-        Optional<GreetingModel> greetingModel = greetingRepository.findById(id);
+    public Greetings getStudentById(int id) {
+        Optional<Greetings> greetingModel = greetingRepository.findById(id);
         if(greetingModel.isPresent()){
             return greetingModel.get();
         }
@@ -28,7 +30,13 @@ public class GreetingService {
             return firstName+" " +lastName;
     }
 
-    public GreetingModel addGreeting(GreetingModel greetingModel) {
-        return greetingRepository.save(greetingModel);
+    public Greetings addGreeting(StudentDto greetings) {
+        Greetings greetingsEntity = new Greetings();
+        greetingsEntity.setMessage(greetings.getMessage());
+        return greetingRepository.save(greetingsEntity);
+    }
+
+    public List<Greetings> greetings() {
+        return greetingRepository.findAll();
     }
 }

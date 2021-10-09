@@ -1,8 +1,11 @@
 package com.bridgelabz.greetingappproblem.controller;
-import com.bridgelabz.greetingappproblem.model.GreetingModel;
+import com.bridgelabz.greetingappproblem.dto.StudentDto;
+import com.bridgelabz.greetingappproblem.model.Greetings;
 import com.bridgelabz.greetingappproblem.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/greetingsController")
@@ -22,14 +25,18 @@ public class GreetingsController {
     }
 
     @PostMapping(value = "/addGreeting")
-    public GreetingModel addStudent(@RequestBody GreetingModel greetingModel){
-        return greetingService.addGreeting(greetingModel);
+    public Greetings addGreetings(@RequestBody StudentDto studentDto){
+        return greetingService.addGreeting(studentDto);
     }
 
     @GetMapping(value="/get-By-Id")
-    public GreetingModel getStudentById(@RequestParam int id){
+    public Greetings getGreetingsById(@RequestParam int id){
         return  greetingService.getStudentById(id);
     }
 
+    @GetMapping(value="/getAllMessages")
+    public List<Greetings> getAllGreetings(){
+        return  greetingService.greetings();
+    }
 
 }

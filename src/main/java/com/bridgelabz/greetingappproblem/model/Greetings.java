@@ -9,11 +9,9 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class GreetingModel {
+public class Greetings {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String firstName;
-    private String lastName;
     private String message;
 }

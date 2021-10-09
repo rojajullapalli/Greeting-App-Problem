@@ -1,9 +1,9 @@
 package com.bridgelabz.greetingappproblem.repository;
 
-import com.bridgelabz.greetingappproblem.model.GreetingModel;
+import com.bridgelabz.greetingappproblem.model.Greetings;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.util.Optional;
+
 @Repository
-public interface GreetingRepository extends JpaRepository<GreetingModel, Integer> {
+public interface GreetingRepository extends JpaRepository<Greetings, Integer> {
 }
