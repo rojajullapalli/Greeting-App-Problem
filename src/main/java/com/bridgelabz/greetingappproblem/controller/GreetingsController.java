@@ -26,5 +26,10 @@ public class GreetingsController {
         return greetingService.addGreeting(greetingModel);
     }
 
+    @GetMapping(value="/get-By-Id")
+    public GreetingModel getStudentById(@RequestParam int id){
+        return  greetingService.getStudentById(id);
+    }
+
 
 }
