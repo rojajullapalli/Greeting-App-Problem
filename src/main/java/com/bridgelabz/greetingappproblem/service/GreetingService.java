@@ -49,4 +49,13 @@ public class GreetingService {
         }
         return null;
     }
+
+    public String deleteGreeting(int id) {
+        Optional<Greetings> greetingModel = greetingRepository.findById(id);
+       if(greetingModel.isPresent()){
+           greetingRepository.delete(greetingModel.get());
+           return "Record Deleted Successfully";
+       }
+       return "Record Does Not Exists with id: "+id;
+    }
 }
